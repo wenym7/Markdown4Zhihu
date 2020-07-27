@@ -18,7 +18,7 @@
 
 ## G2L-Net:从全局到局部的6D位姿估计网络
 
-![1](https://raw.githubusercontent.com/wenym7/Markdown4Zhihu/master/Data/CVPR2020/1.png)
+![1](https://cdn.jsdelivr.net/gh/wenym7/Zhihu@master/CVPR2020/1.png)
 
 ​	第一篇推荐的CVPR2020论文来自伯明翰大学和国防科技大学，提出了一种新的实时6D目标姿态估计框架G2L-Net，该网络在RGB-D探测的点云上以分治的方式运行，能节省时间，并且能达到SOTA的效果。这篇论文很好的是已经把代码开源放了出来，github地址是：https://github.com/DC1991/G2L_Net
 
@@ -28,21 +28,21 @@
 2. 第二步把目标物体的点云传进平移定位网络，进一步进行3D语义分割和估计目标物体的平移。
 3. 第三步把经过语义分割和平移后得到精细的点云转换到局部标准坐标系，用旋转定位网络来训练队点向嵌入特征估计物体的旋转。
 
-![2](https://raw.githubusercontent.com/wenym7/Markdown4Zhihu/master/Data/CVPR2020/2.png)
+![2](https://cdn.jsdelivr.net/gh/wenym7/Zhihu@master/CVPR2020/2.png)
 
 <center>Fig 1: G2L-Net的框架示意图
 </center>
 
 ​    笔者认为这篇文章特别之处在于两点，他们的**点向嵌入特征充分利用了不同视角的信息**从而提高了精度。之前大部分位姿估计模型包括DenseFusion，它们的refine阶段估计得位姿是异步的，也就是先训练好粗略旋转的网络，进一步再去训练细化这个旋转。而这篇论文另辟蹊径在旋转定位网络中估计的粗略旋转与旋转残差估计网络估计的**旋转残差同步输出**，从而节省了运行时间。
 
-![1588839766022](https://raw.githubusercontent.com/wenym7/Markdown4Zhihu/master/Data/CVPR2020/1588839766022.png)
+![1588839766022](https://cdn.jsdelivr.net/gh/wenym7/Zhihu@master/CVPR2020/1588839766022.png)
 
 <center>Fig 2: 不同视点（对于一个3D物体，需要至少四个四点来覆盖）
 </center>
 
 ​	充分利用不同视角信息的想法是来自他们发现在不同视角下全局特征是高度相关高度相似的，这限制了泛化性能，在实验部分就可以表明，在相同大小规模的数据集中，使用点向嵌入特征，由于引入的视角信息，能提高泛化能力。
 
-![1588838746050](https://raw.githubusercontent.com/wenym7/Markdown4Zhihu/master/Data/CVPR2020/1588838746050.png)
+![1588838746050](https://cdn.jsdelivr.net/gh/wenym7/Zhihu@master/CVPR2020/1588838746050.png)
 
 <center>Fig 3: (a)相同数据规模下，G2L-Net与Frustum-P的ADD-(s)指标对比
     	(b)训练轮次的影响
@@ -50,7 +50,7 @@
 
 ​	其中的旋转定位网络由三个部分组成，如图4所示，先训练A结构的网络来预测指向关键点的单位向量，再用B结构来生成对于物体旋转估计的点向嵌入向量，再用C结构的网络来训练旋转残差。
 
-![1588839610868](https://raw.githubusercontent.com/wenym7/Markdown4Zhihu/master/Data/CVPR2020/1588839610868.png)
+![1588839610868](https://cdn.jsdelivr.net/gh/wenym7/Zhihu@master/CVPR2020/1588839610868.png)
 
 <center>Fig 4: 旋转定位网络的结构
 </center>
@@ -66,7 +66,7 @@
 
 ​	  最后来看看在LINEMOD数据集上的实验效果：
 
-![1588842746745](https://raw.githubusercontent.com/wenym7/Markdown4Zhihu/master/Data/CVPR2020/1588842746745.png)
+![1588842746745](https://cdn.jsdelivr.net/gh/wenym7/Zhihu@master/CVPR2020/1588842746745.png)
 
 <center>Fig 5: G2L-Net实验效果
 </center>
@@ -77,11 +77,11 @@
 
 ## PVN3D:3D关键点投票6D姿态估计网络
 
-![1588844486449](https://raw.githubusercontent.com/wenym7/Markdown4Zhihu/master/Data/CVPR2020/1588844486449.png)
+![1588844486449](https://cdn.jsdelivr.net/gh/wenym7/Zhihu@master/CVPR2020/1588844486449.png)
 
 ​	  这是一项港科大、深大还有旷视研究院合作的工作，将基于2D关键点的方法引入到3D位姿估计中，提出一种基于霍夫投票的3D关键点检测网络，利用了刚体的几何约束，提高了6D姿态估计的精确度。这篇论文代码也已经开源啦，有兴趣的同学可以去看看。github地址是：https://github.com/ethnhe/PVN3D.git
 
-![1588845409549](https://raw.githubusercontent.com/wenym7/Markdown4Zhihu/master/Data/CVPR2020/1588845409549.png)
+![1588845409549](https://cdn.jsdelivr.net/gh/wenym7/Zhihu@master/CVPR2020/1588845409549.png)
 
 <center>Fig 6: PVN3D总框架
 </center>
@@ -123,14 +123,14 @@ L_{\text {semantic}}=-\alpha\left(1-q_{i}\right)^{\gamma} \log \left(q_{i}\right
 " class="ee_img tr_noresize" eeimg="1">
 ​		同样，我们看一下在LINEMOD数据集上的实验效果，**ADD(S)指标是95.1**：
 
-![1588849304122](https://raw.githubusercontent.com/wenym7/Markdown4Zhihu/master/Data/CVPR2020/1588849304122.png)
+![1588849304122](https://cdn.jsdelivr.net/gh/wenym7/Zhihu@master/CVPR2020/1588849304122.png)
 
 <center>Fig 7: PVN3D实验效果
 </center>
 
 ​			YCB-Video数据集的定性实验效果图：
 
-![1588849468297](https://raw.githubusercontent.com/wenym7/Markdown4Zhihu/master/Data/CVPR2020/1588849468297.png)
+![1588849468297](https://cdn.jsdelivr.net/gh/wenym7/Zhihu@master/CVPR2020/1588849468297.png)
 
 <center>Fig 8: PVN3D定性实验（YCB-Video）
 </center>
@@ -141,18 +141,18 @@ L_{\text {semantic}}=-\alpha\left(1-q_{i}\right)^{\gamma} \log \left(q_{i}\right
 
 ## 基于可微分代理投票损失的6D目标姿态估计
 
-![1588849687610](https://raw.githubusercontent.com/wenym7/Markdown4Zhihu/master/Data/CVPR2020/1588849687610.png)
+![1588849687610](https://cdn.jsdelivr.net/gh/wenym7/Zhihu@master/CVPR2020/1588849687610.png)
 
 ​		这是一项来自澳大利亚国立大学的工作，可谓是“小题大做”型的论文了，论文考虑的角度是，基于向量场的关键点投票已经证明了它在解决6D位姿估计问题上的有效性和优越性。然而，向量场的直接回归忽略了像素点与关键点之间的距离对假设偏差的影响。换句话说，**当像素远离关键点时，方向向量上的小误差可能会对预估的关键点产生严重偏差**。直观点就是如图9所示：
 
-![1588850048498](https://raw.githubusercontent.com/wenym7/Markdown4Zhihu/master/Data/CVPR2020/1588850048498.png)
+![1588850048498](https://cdn.jsdelivr.net/gh/wenym7/Zhihu@master/CVPR2020/1588850048498.png)
 
 <center>Fig 9: PVN3D总框架
 </center>
 
 ​		相同的角度，当距离越远时，预估的关键点会和实际的关键点产生更大的距离偏差。为了解决这种忽略了像素点与关键点之间的距离对假设偏差的影响，他们提出了一种可微分的代理投票损失。
 
-![1588850608767](https://raw.githubusercontent.com/wenym7/Markdown4Zhihu/master/Data/CVPR2020/1588850608767.png)
+![1588850608767](https://cdn.jsdelivr.net/gh/wenym7/Zhihu@master/CVPR2020/1588850608767.png)
 
 <center>Fig 10: DPVL总框架
 </center>
@@ -185,11 +185,11 @@ L_{\text {semantic}}=-\alpha\left(1-q_{i}\right)^{\gamma} \log \left(q_{i}\right
 
 ​		在LINEMOD数据集上的实验效果，**ADD(S)指标是91.50**：
 
-![1588852097199](https://raw.githubusercontent.com/wenym7/Markdown4Zhihu/master/Data/CVPR2020/1588852097199.png)
+![1588852097199](https://cdn.jsdelivr.net/gh/wenym7/Zhihu@master/CVPR2020/1588852097199.png)
 
 ​		效果上在这三篇里面是最低的了，但是贵在文章的可微分的公式推理上有可取之处，定性效果如下：
 
-![1588852283077](https://raw.githubusercontent.com/wenym7/Markdown4Zhihu/master/Data/CVPR2020/1588852283077.png)
+![1588852283077](https://cdn.jsdelivr.net/gh/wenym7/Zhihu@master/CVPR2020/1588852283077.png)
 
 ​		对比原来向量场的直接回归的方法PVNet来说，是有所改进的。
 
